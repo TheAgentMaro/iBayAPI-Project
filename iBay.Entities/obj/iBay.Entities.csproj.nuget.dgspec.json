@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\marwe\\source\\repos\\iBayAPI-Project\\iBay.WebAPI\\iBay.WebAPI.csproj": {}
+    "C:\\Users\\marwe\\source\\repos\\iBayAPI-Project\\iBay.Entities\\iBay.Entities.csproj": {}
   },
   "projects": {
-    "C:\\Users\\marwe\\source\\repos\\iBayAPI-Project\\iBay.WebAPI\\iBay.WebAPI.csproj": {
+    "C:\\Users\\marwe\\source\\repos\\iBayAPI-Project\\iBay.Entities\\iBay.Entities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\marwe\\source\\repos\\iBayAPI-Project\\iBay.WebAPI\\iBay.WebAPI.csproj",
-        "projectName": "iBay.WebAPI",
-        "projectPath": "C:\\Users\\marwe\\source\\repos\\iBayAPI-Project\\iBay.WebAPI\\iBay.WebAPI.csproj",
+        "projectUniqueName": "C:\\Users\\marwe\\source\\repos\\iBayAPI-Project\\iBay.Entities\\iBay.Entities.csproj",
+        "projectName": "iBay.Entities",
+        "projectPath": "C:\\Users\\marwe\\source\\repos\\iBayAPI-Project\\iBay.Entities\\iBay.Entities.csproj",
         "packagesPath": "C:\\Users\\marwe\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\marwe\\source\\repos\\iBayAPI-Project\\iBay.WebAPI\\obj\\",
+        "outputPath": "C:\\Users\\marwe\\source\\repos\\iBayAPI-Project\\iBay.Entities\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -44,12 +44,6 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "dependencies": {
-            "Swashbuckle.AspNetCore": {
-              "target": "Package",
-              "version": "[6.4.0, )"
-            }
-          },
           "imports": [
             "net461",
             "net462",
@@ -62,9 +56,6 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
-            "Microsoft.AspNetCore.App": {
-              "privateAssets": "none"
-            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }

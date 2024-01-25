@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "y2NtrdLqYwTvApu6BIVj++mUXQ04DcBoHC5BSksCj7s=",
+  "Source": "iBay.WebAPI",
+  "BasePath": "_content/iBay.WebAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

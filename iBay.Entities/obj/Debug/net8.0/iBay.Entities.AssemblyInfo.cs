@@ -11,12 +11,12 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("iBay.WebAPI")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("iBay.Entities")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+10815d08ebbb8484bf16d68e8a5aa62ae32b480f")]
-[assembly: System.Reflection.AssemblyProductAttribute("iBay.WebAPI")]
-[assembly: System.Reflection.AssemblyTitleAttribute("iBay.WebAPI")]
+[assembly: System.Reflection.AssemblyProductAttribute("iBay.Entities")]
+[assembly: System.Reflection.AssemblyTitleAttribute("iBay.Entities")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 
 // Généré par la classe MSBuild WriteCodeFragment.
