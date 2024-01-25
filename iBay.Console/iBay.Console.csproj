@@ -7,4 +7,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\iBay.Entities\iBay.Entities.csproj" />
+    <ProjectReference Include="..\iBay.WebAPI\iBay.WebAPI.csproj" />
+  </ItemGroup>
+
 </Project>
