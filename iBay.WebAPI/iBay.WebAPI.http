@@ -1,0 +1,6 @@
+@iBay.WebAPI_HostAddress = http://localhost:5122
+
+GET {{iBay.WebAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
