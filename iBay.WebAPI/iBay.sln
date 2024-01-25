@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "iBay.WebAPI", "iBay.WebAPI.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "iBay.Entities", "..\iBay.Entities\iBay.Entities.csproj", "{8B436CD4-9CC1-4AAE-8625-3907D8EA17B9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iBay.Console", "..\iBay.Console\iBay.Console.csproj", "{6F38A503-29A4-426F-B147-1B1C6914D506}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{8B436CD4-9CC1-4AAE-8625-3907D8EA17B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B436CD4-9CC1-4AAE-8625-3907D8EA17B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B436CD4-9CC1-4AAE-8625-3907D8EA17B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F38A503-29A4-426F-B147-1B1C6914D506}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F38A503-29A4-426F-B147-1B1C6914D506}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F38A503-29A4-426F-B147-1B1C6914D506}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F38A503-29A4-426F-B147-1B1C6914D506}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

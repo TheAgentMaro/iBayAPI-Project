@@ -10,3 +10,6 @@ C:\Users\marwe\source\repos\iBayAPI-Project\iBay.Entities\obj\Debug\net8.0\iBay.
 C:\Users\marwe\source\repos\iBayAPI-Project\iBay.Entities\obj\Debug\net8.0\refint\iBay.Entities.dll
 C:\Users\marwe\source\repos\iBayAPI-Project\iBay.Entities\obj\Debug\net8.0\iBay.Entities.pdb
 C:\Users\marwe\source\repos\iBayAPI-Project\iBay.Entities\obj\Debug\net8.0\ref\iBay.Entities.dll
+C:\Users\marwe\source\repos\iBayAPI-Project\iBay.Entities\bin\Debug\net8.0\iBay.Entities.runtimeconfig.json
+C:\Users\marwe\source\repos\iBayAPI-Project\iBay.Entities\obj\Debug\net8.0\iBay.Entities.csproj.AssemblyReference.cache
+C:\Users\marwe\source\repos\iBayAPI-Project\iBay.Entities\obj\Debug\net8.0\iBay.Entities.genruntimeconfig.cache
