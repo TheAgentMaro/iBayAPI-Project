@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\iBay.Entities",
+    "\\iBay.Entities\\Models",
+    "\\iBay.WebAPI"
   ],
-  "SelectedNode": "\\iBay.WebAPI",
+  "SelectedNode": "\\iBay.WebAPI\\Program.cs",
   "PreviewInSolutionExplorer": false
 }
