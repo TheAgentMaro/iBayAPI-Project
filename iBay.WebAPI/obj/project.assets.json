@@ -88,6 +88,16 @@
         "frameworkReferences": [
           "Microsoft.AspNetCore.App"
         ]
+      },
+      "iBay.Entities/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/iBay.Entities.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/iBay.Entities.dll": {}
+        }
       }
     }
   },
@@ -420,11 +430,17 @@
         "swashbuckle.aspnetcore.swaggerui.6.4.0.nupkg.sha512",
         "swashbuckle.aspnetcore.swaggerui.nuspec"
       ]
+    },
+    "iBay.Entities/1.0.0": {
+      "type": "project",
+      "path": "../iBay.Entities/iBay.Entities.csproj",
+      "msbuildProject": "../iBay.Entities/iBay.Entities.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
-      "Swashbuckle.AspNetCore >= 6.4.0"
+      "Swashbuckle.AspNetCore >= 6.4.0",
+      "iBay.Entities >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -434,11 +450,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\marwe\\Source\\Repos\\iBayAPI-Project\\iBay.WebAPI\\iBay.WebAPI.csproj",
+      "projectUniqueName": "C:\\Users\\marwe\\source\\repos\\iBayAPI-Project\\iBay.WebAPI\\iBay.WebAPI.csproj",
       "projectName": "iBay.WebAPI",
-      "projectPath": "C:\\Users\\marwe\\Source\\Repos\\iBayAPI-Project\\iBay.WebAPI\\iBay.WebAPI.csproj",
+      "projectPath": "C:\\Users\\marwe\\source\\repos\\iBayAPI-Project\\iBay.WebAPI\\iBay.WebAPI.csproj",
       "packagesPath": "C:\\Users\\marwe\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\marwe\\Source\\Repos\\iBayAPI-Project\\iBay.WebAPI\\obj\\",
+      "outputPath": "C:\\Users\\marwe\\source\\repos\\iBayAPI-Project\\iBay.WebAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -459,7 +475,11 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\marwe\\source\\repos\\iBayAPI-Project\\iBay.Entities\\iBay.Entities.csproj": {
+              "projectPath": "C:\\Users\\marwe\\source\\repos\\iBayAPI-Project\\iBay.Entities\\iBay.Entities.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

@@ -15,4 +15,8 @@
     <Folder Include="Services\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\iBay.Entities\iBay.Entities.csproj" />
+  </ItemGroup>
+
 </Project>

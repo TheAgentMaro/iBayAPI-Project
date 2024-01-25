@@ -1,0 +1,12 @@
+C:\Users\marwe\source\repos\iBayAPI-Project\iBay.Entities\bin\Debug\net8.0\iBay.Entities.deps.json
+C:\Users\marwe\source\repos\iBayAPI-Project\iBay.Entities\bin\Debug\net8.0\iBay.Entities.dll
+C:\Users\marwe\source\repos\iBayAPI-Project\iBay.Entities\bin\Debug\net8.0\iBay.Entities.pdb
+C:\Users\marwe\source\repos\iBayAPI-Project\iBay.Entities\obj\Debug\net8.0\iBay.Entities.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\marwe\source\repos\iBayAPI-Project\iBay.Entities\obj\Debug\net8.0\iBay.Entities.AssemblyInfoInputs.cache
+C:\Users\marwe\source\repos\iBayAPI-Project\iBay.Entities\obj\Debug\net8.0\iBay.Entities.AssemblyInfo.cs
+C:\Users\marwe\source\repos\iBayAPI-Project\iBay.Entities\obj\Debug\net8.0\iBay.Entities.csproj.CoreCompileInputs.cache
+C:\Users\marwe\source\repos\iBayAPI-Project\iBay.Entities\obj\Debug\net8.0\iBay.Entities.sourcelink.json
+C:\Users\marwe\source\repos\iBayAPI-Project\iBay.Entities\obj\Debug\net8.0\iBay.Entities.dll
+C:\Users\marwe\source\repos\iBayAPI-Project\iBay.Entities\obj\Debug\net8.0\refint\iBay.Entities.dll
+C:\Users\marwe\source\repos\iBayAPI-Project\iBay.Entities\obj\Debug\net8.0\iBay.Entities.pdb
+C:\Users\marwe\source\repos\iBayAPI-Project\iBay.Entities\obj\Debug\net8.0\ref\iBay.Entities.dll
