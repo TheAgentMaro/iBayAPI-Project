@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("iBay.WebAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+589e7220662a3e999a2e0102736fed09f12ae810")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8be7f2b761579d8d061c951633c0a5efc03249db")]
 [assembly: System.Reflection.AssemblyProductAttribute("iBay.WebAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("iBay.WebAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
