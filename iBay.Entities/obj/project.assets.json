@@ -4145,32 +4145,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\marwe\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\nikos\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\marwe\\source\\repos\\iBayAPI-Project\\iBay.Entities\\iBay.Entities.csproj",
+      "projectUniqueName": "C:\\Users\\nikos\\OneDrive\\Bureau\\Dossier_3NOSQL_PROJECT\\iBayAPI-Project\\iBay.Entities\\iBay.Entities.csproj",
       "projectName": "iBay.Entities",
-      "projectPath": "C:\\Users\\marwe\\source\\repos\\iBayAPI-Project\\iBay.Entities\\iBay.Entities.csproj",
-      "packagesPath": "C:\\Users\\marwe\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\marwe\\source\\repos\\iBayAPI-Project\\iBay.Entities\\obj\\",
+      "projectPath": "C:\\Users\\nikos\\OneDrive\\Bureau\\Dossier_3NOSQL_PROJECT\\iBayAPI-Project\\iBay.Entities\\iBay.Entities.csproj",
+      "packagesPath": "C:\\Users\\nikos\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\nikos\\OneDrive\\Bureau\\Dossier_3NOSQL_PROJECT\\iBayAPI-Project\\iBay.Entities\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\marwe\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\nikos\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -4224,7 +4216,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

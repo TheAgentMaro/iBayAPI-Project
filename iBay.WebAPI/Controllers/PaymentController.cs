@@ -6,7 +6,7 @@ namespace iBay.WebAPI.Controllers
     [Route("[controller]")]
     public class PaymentController : ControllerBase
     {
-        /* Gère les requêtes HTTP liées au paiement,
-         notamment la finalisation de la commande et les opérations financières associées.*/
+        /* Gï¿½re les requï¿½tes HTTP liï¿½es au paiement,
+         notamment la finalisation de la commande et les opï¿½rations financiï¿½res associï¿½es.*/
     }
 }

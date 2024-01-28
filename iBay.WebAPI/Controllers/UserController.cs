@@ -6,7 +6,7 @@ namespace iBay.WebAPI.Controllers
     [Route("[controller]")]
     public class UserController : ControllerBase
     {
-        /* Gère les requêtes HTTP liées aux utilisateurs,
-                 implémente les opérations CRUD et offre des fonctionnalités liées aux utilisateurs.*/
+        /* Gï¿½re les requï¿½tes HTTP liï¿½es aux utilisateurs,
+                 implï¿½mente les opï¿½rations CRUD et offre des fonctionnalitï¿½s liï¿½es aux utilisateurs.*/
     }
 }
