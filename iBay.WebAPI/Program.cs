@@ -46,6 +46,9 @@ builder.Services.AddSwaggerGen(c =>
             Name = "Marwen Meddeb , Nicolas Brun",
         }
     });
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    c.IncludeXmlComments(xmlPath);
 });
 
 // AddScoped for the Models layer

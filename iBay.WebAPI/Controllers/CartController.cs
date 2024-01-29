@@ -123,8 +123,10 @@ namespace iBay.WebAPI.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Une erreur s'est produite lors de la mise à jour de l'article dans votre panier.");
-                return StatusCode(500, "Une erreur s'est produite lors de la mise à jour de l'article dans votre panier.");
+                _logger.LogError(ex,
+                    "Une erreur s'est produite lors de la mise à jour de l'article dans votre panier.");
+                return StatusCode(500,
+                    "Une erreur s'est produite lors de la mise à jour de l'article dans votre panier.");
             }
         }
 
@@ -171,7 +173,20 @@ namespace iBay.WebAPI.Controllers
         {
             try
             {
-                await _cartService.CheckoutAsync(User.Identity.Name);
+                var cartItems = await _cartService.GetCartItemsAsync(User.Identity.Name);
+
+                // Marquer chaque article comme payé
+                foreach (var item in cartItems)
+                {
+                    item.IsPaid = true;
+                }
+
+                // Enregistrer les modifications dans la base de données
+                foreach (var item in cartItems)
+                {
+                    await _cartService.UpdateCartItemAsync(item.CartItemId, item, User.Identity.Name);
+                }
+
                 return Ok("Le paiement a été effectué avec succès.");
             }
             catch (Exception ex)

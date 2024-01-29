@@ -12,7 +12,7 @@ using iBay.Entities.Contexts;
 namespace iBay.Entities.Migrations
 {
     [DbContext(typeof(iBayContext))]
-    [Migration("20240129111253_FirstMigration")]
+    [Migration("20240129130330_FirstMigration")]
     partial class FirstMigration
     {
         /// <inheritdoc />
@@ -32,6 +32,9 @@ namespace iBay.Entities.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CartItemId"));
+
+                    b.Property<bool>("IsPaid")
+                        .HasColumnType("bit");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
@@ -56,30 +59,6 @@ namespace iBay.Entities.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("CartItems");
-                });
-
-            modelBuilder.Entity("iBay.Entities.Models.Payment", b =>
-                {
-                    b.Property<int>("PaymentId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PaymentId"));
-
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime>("PaymentDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("PaymentId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Payments");
                 });
 
             modelBuilder.Entity("iBay.Entities.Models.Product", b =>
@@ -165,17 +144,6 @@ namespace iBay.Entities.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("iBay.Entities.Models.Payment", b =>
-                {
-                    b.HasOne("iBay.Entities.Models.User", "User")
-                        .WithMany("Payments")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("iBay.Entities.Models.Product", b =>
                 {
                     b.HasOne("iBay.Entities.Models.User", "Seller")
@@ -190,8 +158,6 @@ namespace iBay.Entities.Migrations
             modelBuilder.Entity("iBay.Entities.Models.User", b =>
                 {
                     b.Navigation("CartItems");
-
-                    b.Navigation("Payments");
 
                     b.Navigation("Products");
                 });

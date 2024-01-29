@@ -24,7 +24,5 @@ namespace iBay.Entities.Models
 
         // Collection d'articles dans le panier de l'utilisateur
         public ICollection<CartItem> CartItems { get; set; }
-        // Collection de paiements de l'utilisateur
-        public ICollection<Payment> Payments { get; set; }
     }
 }
