@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
+using System.Reflection;
 using iBay.Entities.Contexts;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
@@ -46,9 +47,8 @@ builder.Services.AddSwaggerGen(c =>
             Name = "Marwen Meddeb , Nicolas Brun",
         }
     });
-    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-    c.IncludeXmlComments(xmlPath);
+    var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 });
 
 // AddScoped for the Models layer
