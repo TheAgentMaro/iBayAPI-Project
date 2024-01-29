@@ -16,13 +16,13 @@ namespace iBay.Entities.Models
         public string Pseudo { get; set; }
         public string Password { get; set; }
 
-        // Rôle de l'utilisateur (par exemple, vendeur, acheteur, etc.)
+        // Rôle de l'utilisateur (Seller, User)
         public string Role { get; set; }
 
         // Collection de produits vendus par l'utilisateur
-        public ICollection<Product> Products { get; set; }
+        public ICollection<Product>? Products { get; set; }
 
         // Collection d'articles dans le panier de l'utilisateur
-        public ICollection<CartItem> CartItems { get; set; }
+        public ICollection<CartItem>? CartItems { get; set; }
     }
 }

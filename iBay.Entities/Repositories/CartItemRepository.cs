@@ -3,6 +3,7 @@ using iBay.Entities.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -18,8 +19,12 @@ public class CartItemRepository : IBasicRepository<CartItem>
     {
         _context = context;
     }
+    public async Task<CartItem> GetSingleAsync(Expression<Func<CartItem, bool>> predicate)
+    {
+        return await _context.CartItems.SingleOrDefaultAsync(predicate);
+    }
 
-    public async Task<CartItem> GetByIdAsync(int id)
+        public async Task<CartItem> GetByIdAsync(int id)
     {
         return await _context.CartItems.FindAsync(id);
     }

@@ -3,6 +3,7 @@ using iBay.Entities.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +18,10 @@ public class UserRepository : IBasicRepository<User>
         public UserRepository(iBayContext context)
         {
             _context = context;
+        }
+        public async Task<User> GetSingleAsync(Expression<Func<User, bool>> predicate)
+        {
+            return await _context.Users.SingleOrDefaultAsync(predicate);
         }
 
         public async Task<User> GetByIdAsync(int id)

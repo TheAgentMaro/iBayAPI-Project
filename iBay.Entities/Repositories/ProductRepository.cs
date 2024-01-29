@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace iBay.Entities.Repositories
 {
@@ -16,6 +17,10 @@ namespace iBay.Entities.Repositories
         public ProductRepository(iBayContext context)
         {
             _context = context;
+        }
+        public async Task<Product> GetSingleAsync(Expression<Func<Product, bool>> predicate)
+        {
+            return await _context.Products.SingleOrDefaultAsync(predicate);
         }
 
         public async Task<Product> GetByIdAsync(int id)

@@ -24,6 +24,35 @@ namespace iBay.WebAPI.Controllers
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
+        [HttpPost("login")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Login([FromBody] LoginModel loginModel)
+        {
+            try
+            {
+                if (loginModel == null)
+                {
+                    return BadRequest("Les informations d'identification de l'utilisateur sont manquantes.");
+                }
+
+                var user = await _userService.LoginAsync(loginModel.Email, loginModel.Password);
+
+                if (user == null)
+                {
+                    return Unauthorized();
+                }
+
+                var token = await _userService.GenerateJwtToken(user);
+
+                return Ok(new { Token = token });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Une erreur s'est produite lors de la connexion de l'utilisateur.");
+                return StatusCode(500, "Une erreur s'est produite lors de la connexion de l'utilisateur.");
+            }
+        }
+
         /// <summary>Récupère la liste de tous les utilisateurs.</summary>
         /// <remarks>
         /// Exemple de requête :
@@ -88,7 +117,7 @@ namespace iBay.WebAPI.Controllers
         /// POST /api/User
         /// {
         ///   "userId": 1,
-        ///   "userName": "Sam Sam",
+        ///   "pseudo": "Sam Sam",
         ///   "email": "sam@supinfo.com",
         ///   "password": "123456",
         ///   "role": "User"
@@ -106,8 +135,18 @@ namespace iBay.WebAPI.Controllers
         {
             try
             {
-                var createdUser = await _userService.CreateUser(user);
-                return CreatedAtAction(nameof(GetUserById), new { id = createdUser.UserId }, createdUser);
+                var newUser = new User
+                {
+                    Email = user.Email,
+                    Pseudo = user.Pseudo,
+                    Password = user.Password,
+                    Role = user.Role // N'oubliez pas d'ajouter le rôle si nécessaire
+                };
+
+                // Logique de création d'utilisateur (avec éventuelle initialisation ultérieure de Products et CartItems)
+                await _userService.CreateUser(newUser);
+
+                return Ok("Utilisateur créé avec succès.");
             }
             catch (Exception ex)
             {
