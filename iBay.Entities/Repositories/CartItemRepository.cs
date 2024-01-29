@@ -5,44 +5,59 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace iBay.Entities.Repositories
 {
-    public class CartItemRepository : IBasicRepository<CartItem>
+public class CartItemRepository : IBasicRepository<CartItem>
+{
+    private readonly iBayContext _context;
+
+    public CartItemRepository(iBayContext context)
     {
-        private readonly iBayContext _context;
+        _context = context;
+    }
 
-        public CartItemRepository(iBayContext context)
-        {
-            _context = context;
-        }
+    public async Task<CartItem> GetByIdAsync(int id)
+    {
+        return await _context.CartItems.FindAsync(id);
+    }
 
-        public CartItem GetById(int id)
-        {
-            return _context.CartItems.Find(id);
-        }
+    public async Task<IEnumerable<CartItem>> GetAllAsync()
+    {
+        return await Task.FromResult(_context.CartItems.ToList());
+    }
 
-        public IEnumerable<CartItem> GetAll()
-        {
-            return _context.CartItems;
-        }
+    public async Task AddAsync(CartItem entity)
+    {
+        _context.CartItems.Add(entity);
+        await _context.SaveChangesAsync();
+    }
 
-        public void Add(CartItem entity)
-        {
-            _context.CartItems.Add(entity);
-            _context.SaveChanges();
-        }
+    public async Task UpdateAsync(CartItem entity)
+    {
+        _context.CartItems.Update(entity);
+        await _context.SaveChangesAsync();
+    }
 
-        public void Update(CartItem entity)
-        {
-            _context.CartItems.Update(entity);
-            _context.SaveChanges();
-        }
-
-        public void Delete(CartItem entity)
+    public async Task DeleteAsync(int id)
+    {
+        var entity = await GetByIdAsync(id);
+        if (entity != null)
         {
             _context.CartItems.Remove(entity);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
     }
+
+    public async Task DeleteAllAsync(Func<CartItem, bool> predicate)
+    {
+        var entities = _context.CartItems.Where(predicate);
+        _context.CartItems.RemoveRange(entities);
+        await _context.SaveChangesAsync();
+    }
 }
+}
+
+

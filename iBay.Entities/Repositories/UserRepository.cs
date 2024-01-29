@@ -5,10 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+ 
 
 namespace iBay.Entities.Repositories
 {
-    public class UserRepository : IBasicRepository<User>
+public class UserRepository : IBasicRepository<User>
     {
         private readonly iBayContext _context;
 
@@ -17,32 +19,43 @@ namespace iBay.Entities.Repositories
             _context = context;
         }
 
-        public User GetById(int id)
+        public async Task<User> GetByIdAsync(int id)
         {
-            return _context.Users.Find(id);
+            return await _context.Users.FindAsync(id);
         }
 
-        public IEnumerable<User> GetAll()
+        public async Task<IEnumerable<User>> GetAllAsync()
         {
-            return _context.Users;
+            return await _context.Users.ToListAsync();
         }
 
-        public void Add(User entity)
+        public async Task AddAsync(User entity)
         {
             _context.Users.Add(entity);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void Update(User entity)
+        public async Task UpdateAsync(User entity)
         {
             _context.Users.Update(entity);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void Delete(User entity)
+        public async Task DeleteAsync(int id)
         {
-            _context.Users.Remove(entity);
-            _context.SaveChanges();
+            var entity = await GetByIdAsync(id);
+            if (entity != null)
+            {
+                _context.Users.Remove(entity);
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        public async Task DeleteAllAsync(Func<User, bool> predicate)
+        {
+            var entities = _context.Users.Where(predicate);
+            _context.Users.RemoveRange(entities);
+            await _context.SaveChangesAsync();
         }
     }
 }

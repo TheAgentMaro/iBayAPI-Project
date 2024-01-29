@@ -5,10 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace iBay.Entities.Repositories
 {
-    public class ProductRepository : IBasicRepository<Product>
+     public class ProductRepository : IBasicRepository<Product>
     {
         private readonly iBayContext _context;
 
@@ -17,32 +18,43 @@ namespace iBay.Entities.Repositories
             _context = context;
         }
 
-        public Product GetById(int id)
+        public async Task<Product> GetByIdAsync(int id)
         {
-            return _context.Products.Find(id);
+            return await _context.Products.FindAsync(id);
         }
 
-        public IEnumerable<Product> GetAll()
+        public async Task<IEnumerable<Product>> GetAllAsync()
         {
-            return _context.Products;
+            return await _context.Products.ToListAsync();
         }
 
-        public void Add(Product entity)
+        public async Task AddAsync(Product entity)
         {
             _context.Products.Add(entity);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void Update(Product entity)
+        public async Task UpdateAsync(Product entity)
         {
             _context.Products.Update(entity);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void Delete(Product entity)
+        public async Task DeleteAsync(int id)
         {
-            _context.Products.Remove(entity);
-            _context.SaveChanges();
+            var entity = await _context.Products.FindAsync(id);
+            if (entity != null)
+            {
+                _context.Products.Remove(entity);
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        public async Task DeleteAllAsync(Func<Product, bool> predicate)
+        {
+            var entities = _context.Products.Where(predicate);
+            _context.Products.RemoveRange(entities);
+            await _context.SaveChangesAsync();
         }
     }
 }

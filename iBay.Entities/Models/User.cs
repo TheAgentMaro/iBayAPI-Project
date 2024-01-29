@@ -11,7 +11,7 @@ namespace iBay.Entities.Models
     public class User
     {
         [Key]
-        public Guid UserId { get; set; }
+        public int UserId { get; set; }
         public string Email { get; set; }
         public string Pseudo { get; set; }
         public string Password { get; set; }
@@ -24,5 +24,7 @@ namespace iBay.Entities.Models
 
         // Collection d'articles dans le panier de l'utilisateur
         public ICollection<CartItem> CartItems { get; set; }
+        // Collection de paiements de l'utilisateur
+        public ICollection<Payment> Payments { get; set; }
     }
 }

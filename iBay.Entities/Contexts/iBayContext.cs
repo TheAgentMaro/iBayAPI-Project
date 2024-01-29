@@ -17,6 +17,7 @@ namespace iBay.Entities.Contexts
         public DbSet<User>? Users { get; set; }
         public DbSet<Product>? Products { get; set; }
         public DbSet<CartItem>? CartItems { get; set; }
+        public DbSet<Payment>? Payments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -37,6 +38,11 @@ namespace iBay.Entities.Contexts
                 .HasOne(ci => ci.Product)
                 .WithMany()
                 .HasForeignKey(ci => ci.ProductId);
+            
+            modelBuilder.Entity<Payment>()
+                .HasOne(p => p.User)
+                .WithMany(u => u.Payments)
+                .HasForeignKey(p => p.UserId);
 
             base.OnModelCreating(modelBuilder);
         }

@@ -3,8 +3,12 @@
     "",
     "\\iBay.Entities",
     "\\iBay.Entities\\Models",
-    "\\iBay.WebAPI"
+    "\\iBay.WebAPI",
+    "\\iBay.WebAPI\\Controllers",
+    "\\iBay.WebAPI\\Interfaces",
+    "\\iBay.WebAPI\\Properties",
+    "\\iBay.WebAPI\\Services"
   ],
-  "SelectedNode": "\\iBay.WebAPI\\Program.cs",
+  "SelectedNode": "\\iBay.WebAPI\\Controllers\\CartController.cs",
   "PreviewInSolutionExplorer": false
 }

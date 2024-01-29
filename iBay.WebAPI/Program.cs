@@ -20,7 +20,8 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 builder.Services.AddDbContext<iBayContext>(options =>
 {
     options
-        .UseLazyLoadingProxies()
+        .UseLazyLoadingProxies(false)
+        .UseChangeTrackingProxies(false)
         .UseSqlServer(builder.Configuration.GetConnectionString("iBayContext"));
 });
 

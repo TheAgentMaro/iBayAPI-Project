@@ -9,10 +9,11 @@ namespace iBay.Entities.Repositories
     public interface IBasicRepository<TEntity>
         where TEntity : class
     {
-        TEntity GetById(int id);
-        IEnumerable<TEntity> GetAll();
-        void Add(TEntity entity);
-        void Update(TEntity entity);
-        void Delete(TEntity entity);
+        Task<TEntity> GetByIdAsync(int id);
+        Task<IEnumerable<TEntity>> GetAllAsync();
+        Task AddAsync(TEntity entity);
+        Task UpdateAsync(TEntity entity);
+        Task DeleteAsync(int id);
+        Task DeleteAllAsync(Func<TEntity, bool> predicate);
     }
 }
