@@ -16,13 +16,13 @@ Le projet iBay est une plateforme de commerce électronique avec une API RESTful
 1. Clonez le dépôt :
 
     ```bash
-    git clone https://github.com/votre-utilisateur/iBay.git
+    git clone https://github.com/TheAgentMaro/iBayAPI-Project.git
     ```
 
 2. Accédez au répertoire du projet :
 
     ```bash
-    cd iBay
+    cd iBayAPI-Project
     ```
 
 3. Installez les dépendances :
@@ -34,7 +34,8 @@ Le projet iBay est une plateforme de commerce électronique avec une API RESTful
 4. Appliquez les migrations pour créer la base de données :
 
     ```bash
-    dotnet ef database update
+    Add-Migrations (Migration name)
+    Update-Database
     ```
 
 5. Lancez l'application :
