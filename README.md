@@ -34,7 +34,7 @@ Le projet iBay est une plateforme de commerce électronique avec une API RESTful
 4. Appliquez les migrations pour créer la base de données :
 
     ```bash
-    Add-Migrations (Migration name)
+    Add-Migration (Migration name)
     Update-Database
     ```
 
