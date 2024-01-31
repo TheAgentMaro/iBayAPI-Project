@@ -30,9 +30,9 @@ namespace iBay.WebAPI.Services
                 new Claim(ClaimTypes.Name, user.Email),
             };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetSection("Jwt:Issuer").Value));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetSection("Jwt:SecretKey").Value));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-            var expires = DateTime.Now.AddDays(Convert.ToDouble(_configuration.GetSection("Jwt:Issuer").Value));
+            var expires = DateTime.Now.AddDays(Convert.ToDouble(_configuration.GetSection("Jwt:ExpireDays").Value) * 24);
 
             var token = new JwtSecurityToken(
                 _configuration.GetSection("Jwt:Issuer").Value,
