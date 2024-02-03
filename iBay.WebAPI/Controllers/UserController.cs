@@ -178,13 +178,12 @@ namespace iBay.WebAPI.Controllers
         /// <response code="404">Si l'utilisateur à mettre à jour n'est pas trouvé.</response>
         /// <response code="500">Si une erreur survient lors de la mise à jour de l'utilisateur.</response>
         [HttpPut("{id}")]
-        [Authorize]        
         public async Task<IActionResult> UpdateUser(int id, [FromBody] User updatedUser)
         {
             try
             {
                 // Vérifier si l'utilisateur est autorisé à mettre à jour
-                if (!User.HasClaim(c => c.Type == "UserId" && c.Value == id.ToString()))
+                if (User.HasClaim(c => c.Type == "UserId" && c.Value == id.ToString()))
                 {
                     return Forbid();
                 }
@@ -223,13 +222,12 @@ namespace iBay.WebAPI.Controllers
         /// <response code="404">Si l'utilisateur à supprimer n'est pas trouvé.</response>
         /// <response code="500">Si une erreur survient lors de la suppression de l'utilisateur.</response>
         [HttpDelete("{id}")]
-        [Authorize]
         public async Task<IActionResult> DeleteUser(int id)
         {
             try
             {
                 // Vérifier si l'utilisateur est autorisé à supprimer
-                if (!User.HasClaim(c => c.Type == "UserId" && c.Value == id.ToString()))
+                if (User.HasClaim(c => c.Type == "UserId" && c.Value == id.ToString()))
                 {
                     return Forbid();
                 }
