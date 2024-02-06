@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using iBay.Entities.Models;
 using iBay.WebAPI.Interfaces;
+using System.Security.Claims;
 
 
 namespace iBay.WebAPI.Controllers
@@ -100,12 +101,22 @@ namespace iBay.WebAPI.Controllers
         /// <response code="201">Opération réussie, le produit a été créé avec succès.</response>
         /// <response code="401">Si l'utilisateur n'est pas autorisé à créer un produit (non vendeur).</response>
         /// <response code="500">Si une erreur survient lors de la création du produit.</response>
-        [Authorize(Roles = "Seller")]
         [HttpPost]
         public async Task<IActionResult> CreateProduct([FromBody] Product product)
         {
             try
             {
+                if (!User.Identity.IsAuthenticated)
+                {
+                    return Unauthorized("Vous n'êtes pas authentifié. Veuillez vous connecter pour créer un produit.");
+                }
+
+                var userRole = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
+                if (userRole != "Seller")
+                {
+                    return Unauthorized("Vous n'êtes pas autorisé à créer un produit.");
+                }
+
                 var createdProduct = await _productService.CreateProductAsync(product);
                 return CreatedAtAction(nameof(GetProductById), new { id = createdProduct.ProductId }, createdProduct);
             }
@@ -138,12 +149,15 @@ namespace iBay.WebAPI.Controllers
         /// <response code="401">Si l'utilisateur n'est pas autorisé à mettre à jour le produit (non vendeur).</response>
         /// <response code="404">Si le produit à mettre à jour n'est pas trouvé.</response>
         /// <response code="500">Si une erreur survient lors de la mise à jour du produit.</response>
-        [Authorize(Roles = "Seller")] 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateProduct(int id, [FromBody] Product product)
         {
             try
             {
+                if (User.Claims.FirstOrDefault(c => c.Type == "role").Value != "Seller")
+                {
+                    return Unauthorized("Vous n'êtes pas autorisé à créer un produit.");
+                }
                 if (id != product.ProductId)
                 {
                     return BadRequest("L'identifiant du produit ne correspond pas.");
@@ -177,12 +191,15 @@ namespace iBay.WebAPI.Controllers
         /// <response code="401">Si l'utilisateur n'est pas autorisé à supprimer le produit (non vendeur).</response>
         /// <response code="404">Si le produit à supprimer n'est pas trouvé.</response>
         /// <response code="500">Si une erreur survient lors de la suppression du produit.</response>
-        [Authorize(Roles = "Seller")] 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduct(int id)
         {
             try
             {
+                if (User.Claims.FirstOrDefault(c => c.Type == "role").Value != "Seller")
+                {
+                    return Unauthorized("Vous n'êtes pas autorisé à créer un produit.");
+                }
                 var success = await _productService.DeleteProductAsync(id);
                 if (!success)
                 {

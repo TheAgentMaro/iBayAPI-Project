@@ -22,6 +22,6 @@ namespace iBay.Entities.Models
         public int SellerId { get; set; }
 
         // Utilisateur vendeur
-        public User Seller { get; set; }
+        public User? Seller { get; set; }
     }
 }
