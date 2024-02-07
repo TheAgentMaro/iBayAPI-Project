@@ -6,8 +6,7 @@ class Program
 {
     static async Task Main(string[] args)
     {
-        // Base URL de votre API
-        string apiUrl = "https://localhost:7190/api";
+        string apiUrl = "https://localhost:44378";
 
         await GetAllUsers(apiUrl);
         await GetUserById(apiUrl, 1);
@@ -28,12 +27,22 @@ class Program
 
     static async Task GetAllUsers(string apiUrl)
     {
-        // TODO: Appel à l'endpoint GET pour récupérer tous les utilisateurs
+        using var client = new HttpClient();
+        var response = await client.GetAsync($"{apiUrl}/api/user");
+        var responseBody = await response.Content.ReadAsStringAsync();
+        Console.WriteLine(responseBody);
+        Console.WriteLine("---------------------------------------------------");
     }
 
     static async Task GetUserById(string apiUrl, int userId)
     {
-        // TODO: Appel à l'endpoint GET pour récupérer un utilisateur par son ID
+        using var Client = new HttpClient();
+        var response = await Client.GetAsync($"{apiUrl}/api/user/022312ba-7841-4735-a292-498791e8f5bb");
+        var responseBody = await response.Content.ReadAsStringAsync();
+        Console.WriteLine(responseBody);
+        Console.WriteLine("---------------------------------------------------");
+
+
     }
 
     static async Task CreateUser(string apiUrl)
