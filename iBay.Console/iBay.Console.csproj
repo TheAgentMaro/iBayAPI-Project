@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\iBay.Entities\iBay.Entities.csproj" />
     <ProjectReference Include="..\iBay.WebAPI\iBay.WebAPI.csproj" />
   </ItemGroup>
