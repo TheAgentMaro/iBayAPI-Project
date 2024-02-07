@@ -14,7 +14,7 @@ namespace iBay.Entities.Contexts
         public iBayContext(DbContextOptions<iBayContext> options) : base(options)
         {
         }
-        public DbSet<User>? Users { get; set; }
+        public DbSet<ApplicationUser>? Users { get; set; }
         public DbSet<Product>? Products { get; set; }
         public DbSet<CartItem>? CartItems { get; set; }
 

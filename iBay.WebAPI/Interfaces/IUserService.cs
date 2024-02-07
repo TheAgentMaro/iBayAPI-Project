@@ -6,12 +6,11 @@ namespace iBay.WebAPI.Interfaces
 {
     public interface IUserService
     {
-        Task<User> LoginAsync(string email, string password);
-        Task<string> GenerateJwtToken(User user);
-        Task<IEnumerable<User>> GetAllUsers();
-        Task<User> GetUserById(int id);
-        Task<User> CreateUser(User user);
-        Task<bool> UpdateUser(User updatedUser);
+        Task<bool> RegisterAsync(ApplicationUser user, string password);
+        Task<AuthResponse> AuthenticateAsync(AuthRequest request);
+        Task<IEnumerable<ApplicationUser>> GetAllUsers();
+        Task<ApplicationUser> GetUserById(int id);
+        Task<bool> UpdateUser(ApplicationUser updatedUser);
         Task<bool> DeleteUser(int id);
     }
 }

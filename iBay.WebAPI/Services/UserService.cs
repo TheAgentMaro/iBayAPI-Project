@@ -7,61 +7,55 @@ using System.Threading.Tasks;
 using iBay.Entities.Models;
 using iBay.Entities.Repositories;
 using iBay.WebAPI.Interfaces;
-using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Identity;
+
 
 namespace iBay.WebAPI.Services
 {
  public class UserService : IUserService
     {
-        private readonly IBasicRepository<User> _userRepository;
+        private readonly IBasicRepository<ApplicationUser> _userRepository;
         private readonly IConfiguration _configuration;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly TokenService _tokenService;
 
-        public UserService(IBasicRepository<User> userRepository, IConfiguration configuration)
+        public UserService(IBasicRepository<ApplicationUser> userRepository, IConfiguration configuration, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager , TokenService tokenService)
         {
             _userRepository = userRepository;
             _configuration = configuration;
+            _userManager = userManager;
+            _signInManager = signInManager;
+            _tokenService = tokenService;
         }
 
-        public async Task<string> GenerateJwtToken(User user)
+        public async Task<bool> RegisterAsync(ApplicationUser user, string password)
         {
-            var claims = new List<Claim>
+            var result = await _userManager.CreateAsync(user, password);
+            return result.Succeeded;
+        }
+
+        public async Task<AuthResponse> AuthenticateAsync(AuthRequest request)
+        {
+            var user = await _userManager.FindByEmailAsync(request.Email);
+
+            if (user == null || !await _userManager.CheckPasswordAsync(user, request.Password))
             {
-                new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
-                new Claim(ClaimTypes.Name, user.Email),
-                new Claim(ClaimTypes.Role,user.Role)
+                return null;
+            }
+
+            var token = _tokenService.CreateToken(user);
+
+            return new AuthResponse
+            {
+                Token = token,
+                Username = user.UserName,
+                Email = user.Email,
+                Role = user.Role
             };
-
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetSection("Jwt:SecretKey").Value));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-            var expires = DateTime.Now.AddDays(Convert.ToDouble(_configuration.GetSection("Jwt:ExpireDays").Value) * 24);
-
-            var token = new JwtSecurityToken(
-                _configuration.GetSection("Jwt:Issuer").Value,
-                _configuration.GetSection("Jwt:Issuer").Value,
-                claims,
-                expires: expires,
-                signingCredentials: creds
-            );
-
-            return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        public async Task<User> LoginAsync(string email, string password)
-        {
-            try
-            {
-                // Logique d'authentification ici, par exemple, vérifier les informations d'identification dans la base de données
-                var user = await _userRepository.GetSingleAsync(u => u.Email == email && u.Password == password);
-
-                return user;
-            }
-            catch (Exception ex)
-            {
-                throw new ApplicationException("Une erreur s'est produite lors de l'authentification de l'utilisateur.", ex);
-            }
-        }
-
-        public async Task<IEnumerable<User>> GetAllUsers()
+        public async Task<IEnumerable<ApplicationUser>> GetAllUsers()
         {
             try
             {
@@ -73,7 +67,7 @@ namespace iBay.WebAPI.Services
             }
         }
 
-        public async Task<User> GetUserById(int id)
+        public async Task<ApplicationUser> GetUserById(int id)
         {
             try
             {
@@ -85,7 +79,7 @@ namespace iBay.WebAPI.Services
             }
         }
 
-        public async Task<User> CreateUser(User user)
+        public async Task<ApplicationUser> CreateUser(ApplicationUser user)
         {
             try
             {
@@ -98,7 +92,7 @@ namespace iBay.WebAPI.Services
             }
         }
 
-        public async Task<bool> UpdateUser(User updatedUser)
+        public async Task<bool> UpdateUser(ApplicationUser updatedUser)
         {
             try
             {

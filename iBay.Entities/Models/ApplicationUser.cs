@@ -1,24 +1,16 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace iBay.Entities.Models
 {
-    //User Model
-    public class User
+    public class ApplicationUser : IdentityUser
     {
-        [Key]
-        public int UserId { get; set; }
-        public string Email { get; set; }
-        public string Pseudo { get; set; }
-        public string Password { get; set; }
-
-        // Rôle de l'utilisateur (Seller, User)
         public string Role { get; set; }
-
         // Collection de produits vendus par l'utilisateur
         public ICollection<Product>? Products { get; set; }
 

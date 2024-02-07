@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using iBay.Entities.Models;
 using iBay.WebAPI.Interfaces;
+using iBay.WebAPI.Services;
+using Microsoft.AspNetCore.Identity.Data;
 namespace iBay.WebAPI.Controllers
 {
     /// <summary>
@@ -17,34 +19,108 @@ namespace iBay.WebAPI.Controllers
     {
         private readonly IUserService _userService;
         private readonly ILogger<UserController> _logger;
+        private readonly TokenService _tokenService;
 
-        public UserController(IUserService userService, ILogger<UserController> logger)
+
+        public UserController(IUserService userService, ILogger<UserController> logger, TokenService tokenService)
         {
             _userService = userService ?? throw new ArgumentNullException(nameof(userService));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _tokenService = tokenService;
         }
 
-        [HttpPost("login")]
+        /// <summary>
+        /// Enregistre un nouvel utilisateur.
+        /// </summary>
+        /// <remarks>
+        /// Exemple de requête :
+        ///
+        /// POST /api/User/register
+        /// {
+        ///   "username": "sami"
+        ///   "email": "sami@supinfo.com"
+        ///   "password": "Password123",
+        ///   "role": "User"
+        /// }
+        ///
+        /// </remarks>
+        /// <param name="model">Les détails de l'utilisateur à enregistrer.</param>
+        /// <returns>Un code de statut HTTP indiquant le résultat de l'opération.</returns>
+        /// <response code="200">Retourné si l'utilisateur est enregistré avec succès.</response>
+        /// <response code="400">Retourné si une erreur survient lors de l'enregistrement de l'utilisateur.</response>
+        /// <response code="500">Retourné si une erreur serveur survient.</response>
+        [HttpPost("register")]
         [AllowAnonymous]
-        public async Task<IActionResult> Login([FromBody] LoginModel loginModel)
+        public async Task<IActionResult> Register([FromBody] RegistrationRequestModel model)
         {
             try
             {
-                if (loginModel == null)
+                var newUser = new ApplicationUser
                 {
-                    return BadRequest("Les informations d'identification de l'utilisateur sont manquantes.");
+                    Email = model.Email,
+                    UserName = model.Username,
+                    Role = model.Role
+                };
+
+                var result = await _userService.RegisterAsync(newUser, model.Password);
+
+                if (result)
+                {
+                    return Ok("Utilisateur enregistré avec succès.");
                 }
+                else
+                {
+                    return BadRequest("Une erreur s'est produite lors de l'enregistrement de l'utilisateur.");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Une erreur s'est produite lors de l'enregistrement de l'utilisateur.");
+                return StatusCode(500, "Une erreur s'est produite lors de l'enregistrement de l'utilisateur.");
+            }
+        }
 
-                var user = await _userService.LoginAsync(loginModel.Email, loginModel.Password);
 
-                if (user == null)
+        /// <summary>
+        /// Connecte un utilisateur enregistré.
+        /// </summary>
+        /// <remarks>
+        /// Exemple de requête :
+        ///
+        /// POST /api/User/login
+        /// {
+        ///   "email": "sami@supinfo.com",
+        ///   "password": "Password123"
+        /// }
+        ///
+        /// </remarks>
+        /// <param name="model">Les informations de connexion de l'utilisateur.</param>
+        /// <returns>Un code de statut HTTP indiquant le résultat de l'opération.</returns>
+        /// <response code="200">Retourné avec un jeton d'authentification valide si l'authentification est réussie.</response>
+        /// <response code="401">Retourné si l'authentification a échoué en raison de mauvaises informations d'identification.</response>
+        /// <response code="500">Retourné si une erreur serveur survient.</response>
+        [HttpPost("login")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Login([FromBody] AuthRequest model)
+        {
+            try
+            {
+                var result = await _userService.AuthenticateAsync(model);
+
+                if (result != null)
+                {
+                    var accessToken = _tokenService.CreateToken(new ApplicationUser
+                    {
+                        UserName = result.Username,
+                        Email = result.Email,
+                        Role = result.Role
+                    });
+                    return Ok(new { Token = accessToken });
+                }
+                else
                 {
                     return Unauthorized();
                 }
-
-                var token = await _userService.GenerateJwtToken(user);
-
-                return Ok(new { Token = token });
             }
             catch (Exception ex)
             {
@@ -52,6 +128,8 @@ namespace iBay.WebAPI.Controllers
                 return StatusCode(500, "Une erreur s'est produite lors de la connexion de l'utilisateur.");
             }
         }
+
+
 
         /// <summary>Récupère la liste de tous les utilisateurs.</summary>
         /// <remarks>
@@ -110,50 +188,6 @@ namespace iBay.WebAPI.Controllers
             }
         }
 
-        /// <summary>Crée un nouvel utilisateur.</summary>
-        /// <remarks>
-        /// Exemple de requête :
-        ///
-        /// POST /api/User
-        /// {
-        ///   "userId": 1,
-        ///   "pseudo": "Sam Sam",
-        ///   "email": "sam@supinfo.com",
-        ///   "password": "123456",
-        ///   "role": "User"
-        /// }
-        ///
-        /// </remarks>
-        /// <param name="user">Les détails du nouvel utilisateur.</param>
-        /// <returns>Les détails du nouvel utilisateur créé.</returns>
-        /// <response code="201">Retourne les détails du nouvel utilisateur créé.</response>
-        /// <response code="400">Si les données de l'utilisateur sont invalides.</response>
-        /// <response code="500">Si une erreur survient lors de la création de l'utilisateur.</response>
-        [HttpPost]
-        [AllowAnonymous]
-        public async Task<IActionResult> CreateUser([FromBody] User user)
-        {
-            try
-            {
-                var newUser = new User
-                {
-                    Email = user.Email,
-                    Pseudo = user.Pseudo,
-                    Password = user.Password,
-                    Role = user.Role // N'oubliez pas d'ajouter le rôle si nécessaire
-                };
-
-                // Logique de création d'utilisateur (avec éventuelle initialisation ultérieure de Products et CartItems)
-                await _userService.CreateUser(newUser);
-
-                return Ok("Utilisateur créé avec succès.");
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Une erreur s'est produite lors de la création de l'utilisateur.");
-                return StatusCode(500, "Une erreur s'est produite lors de la création de l'utilisateur.");
-            }
-        }
 
         /// <summary>Met à jour un utilisateur existant.</summary>
         /// <remarks>
@@ -178,17 +212,17 @@ namespace iBay.WebAPI.Controllers
         /// <response code="404">Si l'utilisateur à mettre à jour n'est pas trouvé.</response>
         /// <response code="500">Si une erreur survient lors de la mise à jour de l'utilisateur.</response>
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateUser(int id, [FromBody] User updatedUser)
+        public async Task<IActionResult> UpdateUser(int id, [FromBody] ApplicationUser updatedUser)
         {
             try
             {
                 // Vérifier si l'utilisateur est autorisé à mettre à jour
-                if (User.HasClaim(c => c.Type == "UserId" && c.Value == id.ToString()))
+                if (User.HasClaim(c => c.Type == "Id" && c.Value == id.ToString()))
                 {
                     return Forbid();
                 }
 
-                if (id != updatedUser.UserId)
+                if (id.ToString() != updatedUser.Id)
                 {
                     return BadRequest("L'identifiant de l'utilisateur ne correspond pas.");
                 }

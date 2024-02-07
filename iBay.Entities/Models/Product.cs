@@ -19,9 +19,9 @@ namespace iBay.Entities.Models
         public DateTime AddedTime { get; set; }
 
         // Identifiant de l'utilisateur vendeur
-        public int SellerId { get; set; }
+        public string SellerId { get; set; }
 
         // Utilisateur vendeur
-        public User? Seller { get; set; }
+        public ApplicationUser? Seller { get; set; }
     }
 }
