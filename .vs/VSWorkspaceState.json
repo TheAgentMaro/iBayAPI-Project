@@ -1,6 +1,7 @@
 {
   "ExpandedNodes": [
     "",
+    "\\iBay.Console",
     "\\iBay.Entities",
     "\\iBay.Entities\\Models",
     "\\iBay.WebAPI",
@@ -9,6 +10,6 @@
     "\\iBay.WebAPI\\Properties",
     "\\iBay.WebAPI\\Services"
   ],
-  "SelectedNode": "\\iBay.WebAPI\\Controllers\\CartController.cs",
+  "SelectedNode": "\\iBay.Console\\Program.cs",
   "PreviewInSolutionExplorer": false
 }
