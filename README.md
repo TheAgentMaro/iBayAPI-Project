@@ -81,12 +81,12 @@ https://localhost:44378/swagger/index.html
 - Créer un nouvel utilisateur
 
 ```json
-POST /api/User
+POST /api/User/register
 {
+    "username": "UtilisateurTest",
     "Email": "test@example.com",
-    "Pseudo": "UtilisateurTest",
     "Password": "MotDePasse123",
-    "Role": "Utilisateur"
+    "Role": "Seller"
 }
 ```
 
@@ -98,6 +98,61 @@ POST /api/User/login
     "Email": "test@example.com",
     "Password": "MotDePasse123",
 }
+```
+
+- Créer un produit : 
+
+```json
+POST /api/Product
+{
+  "name": "Ordinateur",
+  "image": "image.png",
+  "price": 950,
+  "available": true,
+  "addedTime": "2024-02-06T19:47:02.072Z",
+  "sellerId": "1",
+  "seller": {
+    "username": "UtilisateurTest",
+    "email": "test@example.com",
+    "role": "Seller"
+  }
+}
+```
+- Ajouter un article au panier :
+
+```json
+POST /api/Cart
+{
+  "userId": "1",
+  "userName": "sami",
+  "user": {
+    "email": "sami@example.com",
+    "username": "sami",
+    "role": "User"
+  },
+  "product": {
+    "name": "Ordinateur",
+    "image": "image.png",
+    "price": 950,
+    "available": true,
+    "addedTime": "2024-02-06T19:47:02.072Z",
+    "sellerId": "1",
+    "seller": {
+      "email": "selleruser@example.com",
+      "username": "selleruser",
+      "role": "Seller"
+    }
+  },
+  "quantity": 2,
+  "price": 1900,
+  "isPaid": false
+}
+```
+
+- Paiement / Checkout Process
+
+```json
+POST /api/Cart/Checkout
 ```
 
 ## Authentification
