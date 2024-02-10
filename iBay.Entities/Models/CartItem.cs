@@ -39,4 +39,3 @@ namespace iBay.Entities.Models
         public bool IsPaid { get; set; }
     }
 }
-}
