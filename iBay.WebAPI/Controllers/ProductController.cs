@@ -8,6 +8,7 @@ using iBay.Entities.Models;
 using iBay.WebAPI.Interfaces;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace iBay.WebAPI.Controllers
@@ -26,22 +27,50 @@ namespace iBay.WebAPI.Controllers
         }
 
 
-        /// <summary>Récupère la liste de tous les produits.</summary>
+        /// <summary>Récupère la liste de tous les produits trié.</summary>
         /// <remarks>
         /// Exemple de requête :
         ///
-        /// GET /api/Product
+        /// GET /api/Product?sortBy=date&limit=10
         ///
         /// </remarks>
-        /// <returns>Une liste de tous les produits.</returns>
-        /// <response code="200">Retourne la liste de tous les produits.</response>
+        /// <param name="sortBy">Le critère de tri des produits (date, name, price).</param>
+        /// <param name="limit">Le nombre maximum de produits à retourner.</param>
+        /// <returns>Une liste triée et paginée de tous les produits.</returns>
+        /// <response code="200">Retourne la liste triée et paginée de tous les produits.</response>
+        /// <response code="400">Si les paramètres de requête sont invalides.</response>
         /// <response code="500">Si une erreur survient lors de la récupération des produits.</response>
         [HttpGet]
-        public async Task<IActionResult> GetAllProducts()
+        public async Task<IActionResult> GetAllProducts(
+            [FromQuery] string sortBy = "date",
+            [FromQuery] int limit = 10)
         {
             try
             {
-                var products = await _productService.GetAllProductsAsync();
+                if (limit <= 0)
+                {
+                    return BadRequest("La limite doit être supérieure à zéro.");
+                }
+                var allProducts = await _productService.GetAllProductsAsync();
+
+                IEnumerable<Product> products = null;
+                switch (sortBy.ToLower())
+                {
+                    case "date":
+                        products = allProducts.OrderBy(p => p.AddedTime);
+                        break;
+                    case "name":
+                        products = allProducts.OrderBy(p => p.Name);
+                        break;
+                    case "price":
+                        products = allProducts.OrderBy(p => p.Price);
+                        break;
+                    default:
+                        return BadRequest("Le critère de tri spécifié n'est pas valide.");
+                }
+
+                products = products.Take(limit);
+
                 return Ok(products);
             }
             catch (Exception ex)

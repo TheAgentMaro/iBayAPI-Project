@@ -24,7 +24,6 @@ namespace iBay.WebAPI.Services
             }
             catch (Exception ex)
             {
-                // Gérez les exceptions selon les besoins
                 throw new ApplicationException("Une erreur s'est produite lors de la récupération des produits.", ex);
             }
         }
@@ -37,7 +36,6 @@ namespace iBay.WebAPI.Services
             }
             catch (Exception ex)
             {
-                // Gérez les exceptions selon les besoins
                 throw new ApplicationException("Une erreur s'est produite lors de la récupération du produit.", ex);
             }
         }
@@ -51,7 +49,6 @@ namespace iBay.WebAPI.Services
             }
             catch (Exception ex)
             {
-                // Gérez les exceptions selon les besoins
                 throw new ApplicationException("Une erreur s'est produite lors de la création du produit.", ex);
             }
         }
@@ -65,7 +62,6 @@ namespace iBay.WebAPI.Services
             }
             catch (Exception ex)
             {
-                // Gérez les exceptions selon les besoins
                 throw new ApplicationException("Une erreur s'est produite lors de la mise à jour du produit.", ex);
             }
         }
@@ -84,7 +80,6 @@ namespace iBay.WebAPI.Services
             }
             catch (Exception ex)
             {
-                // Gérez les exceptions selon les besoins
                 throw new ApplicationException("Une erreur s'est produite lors de la suppression du produit.", ex);
             }
         }

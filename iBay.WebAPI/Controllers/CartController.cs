@@ -185,7 +185,7 @@ namespace iBay.WebAPI.Controllers
                 foreach (var item in cartItems)
                 {
                     await _cartService.UpdateCartItemAsync(item.CartItemId, item, User.Identity.Name);
-                }
+                } 
 
                 return Ok("Le paiement a été effectué avec succès.");
             }
